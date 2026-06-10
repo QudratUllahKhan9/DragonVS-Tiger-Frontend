@@ -1,17 +1,6 @@
-import axios from 'axios';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// Yahan humne aapke real backend ka link daal diya hai
-const api = axios.create({ 
-  baseURL: 'https://dragon-vs-tiger-backend.vercel.app/api' 
+export default defineConfig({
+  plugins: [react()],
 });
-
-api.interceptors.request.use((config) => {
-  // Aapke AuthContext ke mutabiq token ka naam 'dt_token' hai
-  const token = localStorage.getItem('dt_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-export default api;
